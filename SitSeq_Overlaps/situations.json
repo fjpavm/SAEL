@@ -1,0 +1,74 @@
+{
+    "inputs" : [
+        { "id": 0,
+          "name": "Faces",
+          "type" : "set",
+          "values" : [0, 1, 2],
+          "default" : 0    
+        },
+        { "id": 1,
+          "name": "NAO Marks",
+          "type" : "set",
+          "values" : [0, 1, 2],
+          "default" : 0    
+        },
+        { "id": 2,
+          "name": "luminosity",
+          "type" : "real",
+          "values" : [0.0, 1.0],
+          "default" : 1.0    
+        },
+        { "id": 3,
+          "name": "audio confidence",
+          "type" : "real",
+          "values" : [0.0, 1.0],
+          "default" : 0.0    
+        }
+    ],
+    "situations" : [
+        { "id":0, 
+          "name" : "NAO then Face then darkness",
+          "duration" : {"min": 30.0, "max": 35.0},
+          "events" : [
+                {"input_id" : 1, "start" : {"min":5.0 , "max": 10.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}, 
+                {"input_id" : 0, "start" : {"ref": "prev_start", "min":5.0 , "max": 10.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1},
+                {"input_id" : 2, "start" : 25.0, "end": "end", "value" : {"min" : 0.0, "max" : 0.3}}
+          ] 
+        },
+        { "id":1, 
+          "name" : "Face then NAO",
+          "duration" : {"min": 25.0, "max": 35.0},
+          "events" : [
+                {"input_id" : 0, "start" : {"min":5.0 , "max": 15.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}, 
+                {"input_id" : 1, "start" : {"ref": "prev_start", "min":5.0 , "max": 10.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}
+          ] 
+        },
+        { "id":2, 
+          "name" : "Face and NAO",
+          "duration" : {"min": 25.0, "max": 35.0},
+          "events" : [
+                {"input_id" : 1, "start" : {"min":5.0 , "max": 20.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}, 
+                {"input_id" : 0, "start" : {"ref": "prev_start", "min":-1.0 , "max": 1.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}
+          ] 
+        },
+        { "id":3, 
+          "name" : "Face",
+          "duration" : {"min": 25.0, "max": 35.0},
+          "events" : [
+                {"input_id" : 1, "start" : {"min":5.0 , "max": 20.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}
+          ] 
+        },
+        { "id":4, 
+          "name" : "NAO",
+          "duration" : {"min": 25.0, "max": 35.0},
+          "events" : [
+                {"input_id" : 1, "start" : {"min":5.0 , "max": 20.0}, "duration": {"min" : 3.0, "max": 7.0}, "value" : 1}
+          ] 
+        },
+        { "id":5, 
+          "name" : "No stimulus",
+          "duration" : {"min": 25.0, "max": 35.0},
+          "events" : [] 
+        }
+    ]
+}
